@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.thando.sidemenu.scanbarcode"
+    tools:layout_editor_absoluteY="25dp">
+
+
+    <ImageButton
+        android:id="@+id/scan_button2"
+        android:layout_width="73dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/ic_photo_camera"
+        android:clickable="true"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toTopOf="@+id/scan_format"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/scan_format"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scan_button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginStart="8dp"
+        android:text="format!"
+        android:textIsSelectable="true"
+        app:layout_constraintBottom_toTopOf="@+id/scan_content"
+        app:layout_constraintStart_toStartOf="@+id/scan_button2"
+        app:layout_constraintTop_toBottomOf="@+id/scan_button2"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/scan_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scan_button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="228dp"
+        android:text="format!"
+        android:textIsSelectable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/scan_content"
+        app:layout_constraintTop_toBottomOf="@+id/scan_content"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/scan_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scan_format"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="27dp"
+        android:text="content"
+        android:textIsSelectable="true"
+        app:layout_constraintBottom_toTopOf="@+id/scan_display"
+        app:layout_constraintStart_toStartOf="@+id/scan_format"
+        app:layout_constraintTop_toBottomOf="@+id/scan_format"
+        tools:ignore="MissingConstraints" />
+</android.support.constraint.ConstraintLayout>

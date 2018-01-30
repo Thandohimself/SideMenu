@@ -1,5 +1,6 @@
 package com.example.thando.sidemenu;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,72 +36,67 @@ private static final String REGISTER_URL = "https://barcodescanner.000webhostapp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        id_number = findViewById(R.id.idnumbertxt);
-        firstname = findViewById(R.id.firstnametxt);
-        emailaddress = findViewById(R.id.emailaddresstxt);
-        cellnumber =findViewById(R.id.cellphoneNumbertxt);
-        password = findViewById(R.id.passwordtxt);
+
+
+
+
+
+
+
+
+
+
+        final EditText etid_number = findViewById(R.id.idnumbertxt);
+        final EditText etfirstname = findViewById(R.id.firstnametxt);
+        final EditText etemailaddress = findViewById(R.id.emailaddresstxt);
+        final EditText etcellnumber =findViewById(R.id.cellphoneNumbertxt);
+        final EditText etpassword = findViewById(R.id.passwordtxt);
+        final Button bRegister = (Button) findViewById(R.id.bRegister);
+
+        bRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String name = etName.getText().toString();
+                final String username = etUsername.getText().toString();
+                final int age = Integer.parseInt(etAge.getText().toString());
+                final String password = etPassword.getText().toString();
+                Toast.makeText(RegisterActivity.this, "You pressed", Toast.LENGTH_SHORT).show();
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                RegisterActivity.this.startActivity(intent);
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                builder.setMessage("Register Failed")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                RegisterRequest registerRequest = new RegisterRequest(name, username, age, password, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                queue.add(registerRequest);
+            }
+        });
 
     }
     public void logincheck(View view){
         Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
         Intent I = new Intent(Register.this,Login.class);
         startActivity(I);
-    }  public void createAccount(View view){
-
-        String id = id_number.getText().toString().trim().toLowerCase();
-        String name = firstname.getText().toString().trim().toLowerCase();
-        String email = emailaddress.getText().toString().trim().toLowerCase();
-        String passw = password.getText().toString().trim().toLowerCase();
-        String cell = cellnumber.getText().toString().trim().toLowerCase();
-        register(id,name,email,cell,passw);
-
-        /*Toast.makeText(this, "Account Created\nLogin To Continue", Toast.LENGTH_LONG).show();
-        Intent I = new Intent(Register.this,Login.class);
-        startActivity(I);*/
     }
 
-    public void register(String id, String name, String email, String cell, String passw) {
-        String urlSuffix="?username="+id+"&password="+passw+"&email="+email+"&name="+name+"&cellnumber="+cell;
-        class RegisterUser extends AsyncTask<String,Void,String>{
-            ProgressDialog loading;
 
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                loading=ProgressDialog.show(Register.this,"Please Wait",null,true,true);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                Toast.makeText(Register.this, "Please Check your Internet Connection", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            protected String doInBackground(String... strings) {
-                String s = strings[0];
-                BufferedReader bufferedReader = null;
-                try {
-                    URL url = new URL(REGISTER_URL+s);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                    String results;
-                    results = bufferedReader.readLine();
-                    return results;
-
-
-                }catch (Exception e){
-                    return null;
-                }
-
-            }
-
-
-        }
-        RegisterUser ur = new RegisterUser();
-        ur.execute(urlSuffix);
-    }
 
     public void resetbtn(View view){
         Toast.makeText(this, "", Toast.LENGTH_SHORT).show();

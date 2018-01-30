@@ -1,6 +1,10 @@
 package com.example.thando.sidemenu;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,8 +36,11 @@ CardView cardview;
        mDrawerlayout = findViewById(R.id.drawer);
        mToggle = new ActionBarDrawerToggle(this,mDrawerlayout,R.string.open,R.string.close);
        mDrawerlayout.addDrawerListener(mToggle);
+        NavigationView navigationView = findViewById(R.id.nv);
        mToggle.syncState();
        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+       setupDrawerContent(navigationView);
        // cardview = findViewById(R.id.addbtn1);
       ///  ImageButton imgbtn = findViewById(R.id.imgbtn);
 
@@ -87,5 +94,58 @@ public  void btnclick(View view){
         }
     }
 
+    public void selectIterDrawer(MenuItem menuItem){
+
+        Fragment myfragment = null;
+        Class fragmentClass = null;
+        switch (menuItem.getItemId()){
+            case R.id.Scan:
+                fragmentClass = Scan.class;
+                break;
+            case R.id.History:
+                fragmentClass = History.class;
+                break;
+            case R.id.Profile:
+                fragmentClass = Profile.class;
+                break;
+            case R.id.Search:
+                fragmentClass = Search.class;
+                break;
+            case R.id.Settings:
+                fragmentClass = Settings.class;
+                break;
+            case R.id.Logout:
+                fragmentClass = Logout.class;
+                break;
+            default:
+                fragmentClass = MainActivity.class;
+        }
+
+        try {
+
+            myfragment = (Fragment) fragmentClass.newInstance();
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction().replace(R.id.drawer,myfragment).commit();
+        menuItem.setChecked(true);
+       // setTitle(menuItem.getTitle());
+        mDrawerlayout.closeDrawers();
+
+
+    }
+    private void setupDrawerContent(NavigationView navigationView){
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                selectIterDrawer(item);
+                return true;
+            }
+        });
+    }
 
 }

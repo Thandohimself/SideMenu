@@ -21,10 +21,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_create_accountbtn2" />
+        app:layout_constraintTop_toBottomOf="@+id/create_accountbtn" />
 
     <Button
-        android:id="@+id/login_create_accountbtn2"
+        android:id="@+id/create_accountbtn"
         android:layout_width="201dp"
         android:layout_height="26dp"
         android:layout_marginEnd="8dp"
@@ -36,7 +36,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastnametxt" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordtxt" />
 
     <Button
         android:id="@+id/login_resetbtn2"
@@ -57,7 +57,7 @@
         app:layout_constraintVertical_bias="0.149" />
 
     <EditText
-        android:id="@+id/lastnametxt"
+        android:id="@+id/passwordtxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -68,7 +68,7 @@
         android:inputType="textNoSuggestions|number|numberDecimal|numberPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/cellphoneNumbertxt" />
 
     <EditText
         android:id="@+id/idnumbertxt"
@@ -114,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/firstnametxt" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/cellphoneNumbertxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

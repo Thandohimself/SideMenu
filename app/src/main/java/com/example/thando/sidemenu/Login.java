@@ -6,10 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
+    public static final String LOGIN_URL="";
+    public static final String KEY_EMAIL="email";
+    public static final String KEY_PASSWORD="password";
+    public static final String LOGIN_SUCCESS="success";
+    public static final String SHARED_PREF_NAME="tech";
+    public static final String EMAIL_SHARED_PREF="email";
+    public static final String LOGGEDIN_SHARED_PREF="loggedin";
+    private EditText etEmail;
+    private EditText etPassword;
+
+
 
     private Typeface myfont;
     private TextView usernametxt;

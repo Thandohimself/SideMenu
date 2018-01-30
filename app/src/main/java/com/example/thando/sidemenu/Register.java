@@ -40,7 +40,7 @@ private static final String REGISTER_URL = "https://barcodescanner.000webhostapp
         Intent I = new Intent(Register.this,Login.class);
         startActivity(I);
     }  public void createAccount(View view){
-\
+
         String id = id_number.getText().toString().trim().toLowerCase();
         String name = firstname.getText().toString().trim().toLowerCase();
         String email = emailaddress.getText().toString().trim().toLowerCase();
